@@ -13,7 +13,7 @@ class BoostMinerConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
     exports_sources = "src/*"
-    #requires = "gtest/1.12.1"
+    requires = "gtest/1.12.1"
 
     def config_options(self):
         if self.settings.os == "Windows":
