@@ -24,4 +24,4 @@ macro(package_add_test TESTNAME)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(TestDetectBoost demo_test.cpp)
+package_add_test(TestCppAppTemplate demo_test.cpp)
