@@ -1,13 +1,13 @@
 from conans import ConanFile, CMake
 
-class BoostMinerConan(ConanFile):
+class CPPAappTemplateConan(ConanFile):
     name = "CppAppTemplate"
     version = "0.2.4"
     license = "OpenSource"
     author = "Powco"
     url = "https://github.com/ProofOfWorkCompany/cpp-app-template"
     description = "Best practices with c++"
-    topics = ("bitcoin", "mining", "cpu", "sha256", "proofofwork", "boost")
+    topics = ("what", "this", "app", "is", "about")
     settings = "os", "compiler", "build_type", "arch"   
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
@@ -25,4 +25,4 @@ class BoostMinerConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("BoostMiner", dst="bin", keep_path=False)
+        self.copy("CPPAappTemplate", dst="bin", keep_path=False)
