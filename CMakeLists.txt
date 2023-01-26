@@ -12,6 +12,8 @@ target_include_directories(libCPPTemplate PUBLIC include)
 target_compile_features(libCPPTemplate PUBLIC cxx_std_20)
 set_target_properties(libCPPTemplate PROPERTIES CXX_EXTENSIONS OFF)
 
+target_link_libraries(CppAppTemplate PUBLIC libCPPTemplate CONAN_PKG::argh)
+
 add_executable(CppAppTemplate src/main.cpp)
 target_include_directories(CppAppTemplate PUBLIC include)
 target_compile_features(CppAppTemplate PUBLIC cxx_std_20)
