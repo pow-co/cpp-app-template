@@ -13,7 +13,7 @@ class CPPAappTemplateConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
     exports_sources = "src/*"
-    requires = ["argh/1.3.2", "gtest/1.12.1"]
+    requires = ["argh/1.3.2", "gtest/1.12.1", "boost/1.81.0"]
 
     def config_options(self):
         if self.settings.os == "Windows":
