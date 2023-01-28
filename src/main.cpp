@@ -1,5 +1,6 @@
 #include <iostream>
 #include <argh.h>
+#include <websocketpp/client.hpp>
 
 int main(int argc, char* argv[]) {
 
