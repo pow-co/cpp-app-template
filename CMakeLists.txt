@@ -13,13 +13,29 @@ target_compile_features(libCPPTemplate PUBLIC cxx_std_20)
 set_target_properties(libCPPTemplate PROPERTIES CXX_EXTENSIONS OFF)
 
 add_executable(CppAppTemplate src/main.cpp)
-#add_executable(WebsocketsEchoClient src/websockets_echo_client.cpp)
 
-target_link_libraries(CppAppTemplate PUBLIC libCPPTemplate CONAN_PKG::argh)
-target_link_libraries(CppAppTemplate PUBLIC libCPPTemplate CONAN_PKG::websocketpp)
+target_link_libraries(CppAppTemplate PUBLIC
+  libCPPTemplate
+  CONAN_PKG::argh
+  CONAN_PKG::websocketpp
+  CONAN_PKG::boost
+)
+
 target_include_directories(CppAppTemplate PUBLIC include)
 target_compile_features(CppAppTemplate PUBLIC cxx_std_20)
 set_target_properties(CppAppTemplate PROPERTIES CXX_EXTENSIONS OFF)
+
+add_executable(Websockets src/websockets.cpp)
+
+target_link_libraries(Websockets PUBLIC
+  libCPPTemplate
+  CONAN_PKG::argh
+  CONAN_PKG::boost
+)
+
+target_include_directories(Websockets PUBLIC include)
+target_compile_features(Websockets PUBLIC cxx_std_20)
+set_target_properties(Websockets PROPERTIES CXX_EXTENSIONS OFF)
 
 option(PACKAGE_TESTS "Build the tests" ON)
 
