@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include "dotenv/dotenv.h"
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -15,6 +16,7 @@ using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
 // Sends a WebSocket message and prints the response
 int main(int argc, char** argv)
 {
+   dotenv::init();
     try
     {
         // Check command line arguments.
@@ -26,9 +28,18 @@ int main(int argc, char** argv)
                 "    websocket-client-sync echo.websocket.org 80 \"Hello, world!\"\n";
             return EXIT_FAILURE;
         }
-        std::string host = argv[1];
-        auto const  port = argv[2];
-        auto const  text = argv[3];
+//std::string host = argv[1];
+//        auto const  port = argv[2];
+//       auto const  text = argv[3];
+
+        std::string host {dotenv::getenv ("websockets_host", "pow.co")};
+
+        std::string port {dotenv::getenv ("websockets_port", "5300")};
+
+        std::string text = "";
+
+        std::cout << "host: " << host << std::endl;
+        std::cout << "port: " << port << std::endl;
 
         // The io_context is required for all I/O
         net::io_context ioc;
