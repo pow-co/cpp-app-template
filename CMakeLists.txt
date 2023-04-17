@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(CppAppTemplate CXX)
 
-# Setup paths to outputs of conan's "cmake_find_package" generator
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS)
+find_package(argh CONFIG REQUIRED)
+find_package(boost CONFIG REQUIRED)
 
 add_library(libCPPTemplate STATIC
     src/logger.cpp)
@@ -16,26 +15,13 @@ add_executable(CppAppTemplate src/main.cpp)
 
 target_link_libraries(CppAppTemplate PUBLIC
   libCPPTemplate
-  CONAN_PKG::argh
-  CONAN_PKG::websocketpp
-  CONAN_PKG::boost
+  argh::argh
+  boost::boost
 )
 
 target_include_directories(CppAppTemplate PUBLIC include)
 target_compile_features(CppAppTemplate PUBLIC cxx_std_20)
 set_target_properties(CppAppTemplate PROPERTIES CXX_EXTENSIONS OFF)
-
-add_executable(Websockets src/websockets.cpp)
-
-target_link_libraries(Websockets PUBLIC
-  libCPPTemplate
-  CONAN_PKG::argh
-  CONAN_PKG::boost
-)
-
-target_include_directories(Websockets PUBLIC include)
-target_compile_features(Websockets PUBLIC cxx_std_20)
-set_target_properties(Websockets PROPERTIES CXX_EXTENSIONS OFF)
 
 option(PACKAGE_TESTS "Build the tests" ON)
 
