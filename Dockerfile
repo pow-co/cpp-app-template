@@ -16,9 +16,7 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 20
 
 RUN pip install conan
 
-RUN conan config set general.revisions_enabled=1
 RUN conan profile new default --detect
-RUN conan profile update settings.compiler.libcxx=libstdc++11 default
 
 COPY . /home/conan/cpp-app-template
 WORKDIR /home/conan/cpp-app-template

@@ -14,7 +14,7 @@ class CPPAappTemplateConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     exports_sources = "src/*"
-    requires = "argh/1.3.2", "gtest/1.12.1", "boost/1.80.0"
+    requires = "argh/1.3.2", "gtest/1.12.1", "boost/1.80.0", "taocpp-pegtl/3.2.7"
 
     def set_version (self):
         if "CIRCLE_TAG" in environ:

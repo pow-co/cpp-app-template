@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(CppAppTemplate CXX)
 
+find_package(Boost CONFIG REQUIRED)
 find_package(argh CONFIG REQUIRED)
-find_package(boost CONFIG REQUIRED)
 
 add_library(libCPPTemplate STATIC
     src/logger.cpp)
