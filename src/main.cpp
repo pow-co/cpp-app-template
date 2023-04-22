@@ -1,6 +1,5 @@
 #include <iostream>
 #include <argh.h>
-#include <websocketpp/client.hpp>
 
 #include <boost/beast.hpp>
 #include <boost/beast/ssl.hpp>
