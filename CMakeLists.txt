@@ -24,6 +24,19 @@ target_include_directories(CppAppTemplate PUBLIC include)
 target_compile_features(CppAppTemplate PUBLIC cxx_std_20)
 set_target_properties(CppAppTemplate PROPERTIES CXX_EXTENSIONS OFF)
 
+add_executable(Websockets src/websockets.cpp)
+
+target_link_libraries(Websockets PUBLIC
+  libCPPTemplate
+  boost::boost
+  openssl::openssl
+  argh
+)
+
+target_include_directories(Websockets PUBLIC include)
+target_compile_features(Websockets PUBLIC cxx_std_20)
+set_target_properties(Websockets PROPERTIES CXX_EXTENSIONS OFF)
+
 option(PACKAGE_TESTS "Build the tests" ON)
 
 #uncomment this if you are using cpp boost libraries
