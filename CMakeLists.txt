@@ -3,7 +3,7 @@ project(CppAppTemplate CXX)
 
 find_package(Boost CONFIG REQUIRED)
 find_package(argh CONFIG REQUIRED)
-find_package (OpenSSL CONFIG REQUIRED)
+find_package(OpenSSL CONFIG REQUIRED)
 
 add_library(libCPPTemplate STATIC src/logger.cpp)
 
@@ -39,7 +39,6 @@ set_target_properties(Websockets PROPERTIES CXX_EXTENSIONS OFF)
 
 option(PACKAGE_TESTS "Build the tests" ON)
 
-#uncomment this if you are using cpp boost libraries
 add_definitions("-DHAS_BOOST")
 
 if(PACKAGE_TESTS)

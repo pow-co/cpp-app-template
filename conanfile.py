@@ -15,11 +15,12 @@ class CPPAappTemplateConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     exports_sources = "src/*"
     requires = [
-        "argh/1.3.2",
-        "gtest/1.12.1",
-        "boost/1.80.0",
-        "taocpp-pegtl/3.2.7",
-        "openssl/1.1.1t"]
+        "argh/1.3.2",         # for parsing command-line arguments
+        "gtest/1.12.1",       # for writing unit tests
+        "boost/1.80.0",       # collection of libraries with practically everything
+        "taocpp-pegtl/3.2.7", # A parser, used for reading files or text input.
+        "openssl/1.1.1t"      # Required for SSL with boost beast.
+    ]
 
     def set_version (self):
         if "CIRCLE_TAG" in environ:
@@ -27,7 +28,7 @@ class CPPAappTemplateConan(ConanFile):
         if "CURRENT_VERSION" in environ:
             self.version = environ['CURRENT_VERSION']
         else:
-            self.version = "v0.0.13"
+            self.version = "0.3"
 
     def config_options (self):
         if self.settings.os == "Windows":
