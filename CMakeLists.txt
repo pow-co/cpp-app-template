@@ -3,6 +3,7 @@ project(CppAppTemplate CXX)
 
 find_package(Boost CONFIG REQUIRED)
 find_package(argh CONFIG REQUIRED)
+find_package (OpenSSL CONFIG REQUIRED)
 
 add_library(libCPPTemplate STATIC src/logger.cpp)
 
@@ -14,8 +15,9 @@ add_executable(CppAppTemplate src/main.cpp)
 
 target_link_libraries(CppAppTemplate PUBLIC
   libCPPTemplate
-  argh
   boost::boost
+  openssl::openssl
+  argh
 )
 
 target_include_directories(CppAppTemplate PUBLIC include)
