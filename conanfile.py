@@ -1,8 +1,10 @@
-from conans import ConanFile, CMake
+from conan import ConanFile
+from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
+from os import environ
 
 class CPPAappTemplateConan(ConanFile):
     name = "CppAppTemplate"
-    version = "0.2.4"
+    version = "0.3"
     license = "OpenSource"
     author = "Powco"
     url = "https://github.com/ProofOfWorkCompany/cpp-app-template"
@@ -11,18 +13,49 @@ class CPPAappTemplateConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"   
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-    generators = "cmake"
     exports_sources = "src/*"
-    requires = ["argh/1.3.2", "gtest/1.12.1", "websocketpp/0.8.2", "boost/1.81.0"]
+    requires = [
+        "argh/1.3.2",         # for parsing command-line arguments
+        "gtest/1.12.1",       # for writing unit tests
+        "boost/1.80.0",       # collection of libraries with practically everything
+        "taocpp-pegtl/3.2.7", # A parser, used for reading files or text input.
+        "openssl/1.1.1t"      # Required for SSL with boost beast.
+    ]
 
-    def config_options(self):
+    def set_version (self):
+        if "CIRCLE_TAG" in environ:
+            self.version = environ.get ("CIRCLE_TAG")[1:]
+        if "CURRENT_VERSION" in environ:
+            self.version = environ['CURRENT_VERSION']
+        else:
+            self.version = "0.3"
+
+    def config_options (self):
         if self.settings.os == "Windows":
             del self.options.fPIC
 
-    def build(self):
-        cmake = CMake(self)
+    def configure_cmake (self):
+        cmake = CMake (self)
         cmake.configure()
-        cmake.build()
+        return cmake
+    
+    def layout(self):
+        cmake_layout(self)
 
-    def package(self):
-        self.copy("CPPAappTemplate", dst="bin", keep_path=False)
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        tc = CMakeToolchain(self)
+        tc.generate()
+
+    def build (self):
+        cmake = self.configure_cmake ()
+        cmake.build ()
+
+    def package (self):
+        cmake = CMake(self)
+        cmake.install()
+
+    def package_info (self):
+#        self.cpp_info.libdirs = ["lib"]  # Default value is 'lib'
+        self.cpp_info.libs = ["CppAppTemplate"]
